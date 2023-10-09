@@ -1,9 +1,12 @@
 extends TileMap
 
+@onready var character_spawner = $"../character_spawner"
+
 var tile = {
 	"floor": Vector2i(0, 0),
 	"wall": Vector2i(1, 0),
 	"door": Vector2i(2, 0),
+	"door_open": Vector2i(2, 1),
 	"entrance": Vector2i(3, 0),
 	"exit": Vector2i(4, 0),
 	"debug_side_path": Vector2i(5, 7),
@@ -16,13 +19,15 @@ class Room:
 	var area : Rect2
 	var connected : bool
 	var neighbors : Array
+	var mob_count : int
 
 class Cell:
 	var ID : int
 	var cell_position : Vector2i
 	var cell_room : Room
-	var npc : CharacterBody2D
+	var character : Node2D
 	var tile : Vector2i
+	var walkable : bool
 
 var level_area = Rect2(Vector2i(1, 1), Vector2i(32, 32))
 var max_room_size = 8
@@ -49,6 +54,8 @@ func _ready():
 	set_room_types()
 	fill_rooms()
 	update_cells()
+	spawn_player()
+	spawn_mobs(6)
 
 func generate_bsp(area):
 	if area.size.x > max_room_size and area.size.y > max_room_size:
@@ -118,6 +125,16 @@ func update_cells(): #EXTREMELY BAD FUNCTION. REMOVE IT IN THE FUTURE
 		for y in range(int(level_area.position.y - 1), int(level_area.end.y + 1)):
 			var cell = get_cell_at(Vector2i(x,y))
 			cell.tile = get_cell_atlas_coords(0, Vector2i(x, y), 0)
+			if cell.tile == tile["entrance"]:
+				cell.walkable = true
+			elif cell.tile == tile["exit"]:
+				cell.walkable = true
+			elif cell.tile == tile["floor"]:
+				cell.walkable = true
+			elif cell.tile == tile["door"]:
+				cell.walkable = true
+			else:
+				cell.walkable = false
 
 func place_floors():
 	for room in rooms:
@@ -295,3 +312,27 @@ func fill_rooms():
 				for y in range(y_start, y_end):
 					if get_cell_atlas_coords(0, Vector2i(x, y), 0) == tile["debug_path"]:
 						set_cell(0, Vector2i(x, y), 0, tile["floor"])
+
+func spawn_player():
+	character_spawner.spawn_player(entrance_pos)
+
+func spawn_mobs(mob_count): #add chances for different mobs
+	var placed_mobs = 0
+	var try = 0
+	
+	while placed_mobs < mob_count and try < 100:
+		var random_room_index = randi() % rooms.size()
+		var room = rooms[random_room_index]
+		
+		if room.connected == true and room.type == 4 and room.mob_count < 4:
+			var mob_x = randf_range(int(room.area.position.x) + 1, int(room.area.position.x + room.area.size.x) - 1) #randi_range can create exit and entrance outside of room for some reason
+			var mob_y = randf_range(int(room.area.position.y) + 1, int(room.area.position.y + room.area.size.y) - 1)
+			var character_pos = Vector2i(mob_x, mob_y)
+			var new_cell = get_cell_at(character_pos)
+			
+			if new_cell.character == null:
+				character_spawner.spawn_rat(Vector2i(mob_x, mob_y))
+				room.mob_count += 1
+				placed_mobs += 1
+		else:
+			try += 1

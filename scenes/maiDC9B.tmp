@@ -1,13 +1,13 @@
 [gd_scene load_steps=8 format=3 uid="uid://bki4ajwm0wy0m"]
 
 [ext_resource type="Script" path="res://scripts/game_main.gd" id="1_iwhof"]
+[ext_resource type="Texture2D" uid="uid://euv0ok64mhya" path="res://art/tileset_dungeon.png" id="1_jals3"]
 [ext_resource type="Script" path="res://scripts/level_generator.gd" id="2_d8nk2"]
 [ext_resource type="Script" path="res://scripts/input_handler.gd" id="2_edpf0"]
 [ext_resource type="Script" path="res://scripts/character_spawner.gd" id="3_b7ivp"]
-[ext_resource type="Texture2D" uid="uid://euv0ok64mhya" path="res://art/tileset_dungeon.png" id="4_mafgm"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eu6jc"]
-texture = ExtResource("4_mafgm")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4r2gr"]
+texture = ExtResource("1_jals3")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -19,7 +19,7 @@ texture = ExtResource("4_mafgm")
 7:7/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_o8w6d"]
-sources/0 = SubResource("TileSetAtlasSource_eu6jc")
+sources/1 = SubResource("TileSetAtlasSource_4r2gr")
 
 [node name="main_scene" type="Node2D"]
 script = ExtResource("1_iwhof")

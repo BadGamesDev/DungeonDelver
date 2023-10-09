@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=3 uid="uid://bki4ajwm0wy0m"]
+
+[ext_resource type="Texture2D" uid="uid://dtym5adjlb6jt" path="res://art/tileset_dungeon.png" id="1_jals3"]
+[ext_resource type="Script" path="res://scripts/level_generator.gd" id="2_d8nk2"]
+[ext_resource type="Script" path="res://scripts/character_spawner.gd" id="3_b7ivp"]
+[ext_resource type="PackedScene" uid="uid://yxkeicru62c4" path="res://prefabs/player.tscn" id="4_6k6ao"]
+[ext_resource type="PackedScene" uid="uid://bfsdl5qk5xpnh" path="res://prefabs/mob_rat.tscn" id="5_4yqp5"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l2psv"]
+texture = ExtResource("1_jals3")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+5:7/0 = 0
+6:7/0 = 0
+7:7/0 = 0
+4:0/0 = 0
+3:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_o8w6d"]
+sources/0 = SubResource("TileSetAtlasSource_l2psv")
+
+[node name="main_scene" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_o8w6d")
+format = 2
+script = ExtResource("2_d8nk2")
+
+[node name="character_spawner" type="Node" parent="."]
+script = ExtResource("3_b7ivp")
+
+[node name="player" parent="." instance=ExtResource("4_6k6ao")]
+
+[node name="mob_rat" parent="." instance=ExtResource("5_4yqp5")]

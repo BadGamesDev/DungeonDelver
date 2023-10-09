@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://euv0ok64mhya"
-path="res://.godot/imported/tileset_dungeon.png-48a87b89b79468d7121faaf7284f3b4f.ctex"
+uid="uid://ceawcucic6w1s"
+path="res://.godot/imported/human_male_body.png-59c9ebd826093cedbf9f31f53d2372c1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/tileset_dungeon.png"
-dest_files=["res://.godot/imported/tileset_dungeon.png-48a87b89b79468d7121faaf7284f3b4f.ctex"]
+source_file="res://art/human_male_body.png"
+dest_files=["res://.godot/imported/human_male_body.png-59c9ebd826093cedbf9f31f53d2372c1.ctex"]
 
 [params]
 

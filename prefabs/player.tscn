@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://yxkeicru62c4"]
+
+[ext_resource type="Script" path="res://scripts/character_main.gd" id="1_ht8d7"]
+[ext_resource type="Script" path="res://scripts/character_data.gd" id="1_wlpbu"]
+[ext_resource type="Texture2D" uid="uid://ceawcucic6w1s" path="res://art/human_male_body.png" id="2_7kuc1"]
+[ext_resource type="Script" path="res://scripts/character_functions.gd" id="3_ecgd1"]
+
+[node name="player" type="Node2D"]
+script = ExtResource("1_ht8d7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_7kuc1")
+
+[node name="Data" type="Node" parent="."]
+script = ExtResource("1_wlpbu")
+
+[node name="Functions" type="Node" parent="."]
+script = ExtResource("3_ecgd1")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)

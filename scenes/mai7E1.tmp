@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bki4ajwm0wy0m"]
+[gd_scene load_steps=9 format=3 uid="uid://bki4ajwm0wy0m"]
 
 [ext_resource type="Script" path="res://scripts/game_main.gd" id="1_iwhof"]
 [ext_resource type="Script" path="res://scripts/level_generator.gd" id="2_d8nk2"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://scripts/character_spawner.gd" id="3_b7ivp"]
 [ext_resource type="Texture2D" uid="uid://euv0ok64mhya" path="res://art/tileset_dungeon.png" id="4_mafgm"]
 [ext_resource type="Script" path="res://scripts/time_manager.gd" id="6_o01ca"]
-[ext_resource type="Script" path="res://scripts/ui_manager.gd" id="7_fmh75"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eu6jc"]
 texture = ExtResource("4_mafgm")
@@ -39,26 +38,3 @@ script = ExtResource("2_d8nk2")
 
 [node name="time_manager" type="Node" parent="."]
 script = ExtResource("6_o01ca")
-
-[node name="ui_manager" type="Node" parent="."]
-script = ExtResource("7_fmh75")
-
-[node name="main_ui" type="CanvasLayer" parent="ui_manager"]
-
-[node name="player_health" type="RichTextLabel" parent="ui_manager/main_ui"]
-offset_left = 40.0
-offset_right = 160.0
-offset_bottom = 20.0
-text = "Health: 0 / 0"
-
-[node name="player_exp" type="RichTextLabel" parent="ui_manager/main_ui"]
-offset_left = 40.0
-offset_top = 20.0
-offset_right = 160.0
-offset_bottom = 40.0
-text = "Exp: 0 / 0"
-
-[node name="player_level" type="RichTextLabel" parent="ui_manager/main_ui"]
-offset_right = 40.0
-offset_bottom = 40.0
-text = "1"

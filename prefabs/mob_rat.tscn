@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://bfsdl5qk5xpnh"]
+[gd_scene load_steps=7 format=3 uid="uid://bfsdl5qk5xpnh"]
 
 [ext_resource type="Script" path="res://scripts/character_data.gd" id="1_3cewv"]
 [ext_resource type="Script" path="res://scripts/character_main.gd" id="1_30e0n"]
 [ext_resource type="Texture2D" uid="uid://bqr302ksdyogy" path="res://art/mob_rat.png" id="2_7r3pl"]
 [ext_resource type="Script" path="res://scripts/character_functions.gd" id="3_l0m1o"]
+[ext_resource type="Script" path="res://scripts/AI_rat.gd" id="5_63y6r"]
+[ext_resource type="Script" path="res://scripts/character_time.gd" id="6_h52ox"]
 
 [node name="mob_rat" type="Node2D"]
 script = ExtResource("1_30e0n")
@@ -16,3 +18,9 @@ script = ExtResource("1_3cewv")
 
 [node name="Functions" type="Node" parent="."]
 script = ExtResource("3_l0m1o")
+
+[node name="AI" type="Node" parent="."]
+script = ExtResource("5_63y6r")
+
+[node name="Time" type="Node" parent="."]
+script = ExtResource("6_h52ox")

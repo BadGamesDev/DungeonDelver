@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ce1s5tgownkd5"]
+
+[ext_resource type="Script" path="res://scripts/character_main.gd" id="1_uw1qd"]
+[ext_resource type="Texture2D" uid="uid://by406a4tift0" path="res://art/mob_rat_corpse.png" id="2_eso0u"]
+
+[node name="mob_rat_corpse" type="Node2D"]
+script = ExtResource("1_uw1qd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_eso0u")

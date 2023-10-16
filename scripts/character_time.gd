@@ -16,8 +16,7 @@ func time_passed():
 		elif data.time_health_regen >= data.health_regen_speed: #Might just change this to an else statement
 			data.time_health_regen -= data.health_regen_speed
 			functions.regen_health()
-			print("regeneded")
-			
+
 	if data.AI == true:
 		if data.time_action < 100:
 			data.time_action += 1

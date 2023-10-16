@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://yxkeicru62c4"]
+[gd_scene load_steps=8 format=3 uid="uid://yxkeicru62c4"]
 
+[ext_resource type="Script" path="res://scripts/inventory.gd" id="1_cmhqp"]
 [ext_resource type="Script" path="res://scripts/character_main.gd" id="1_ht8d7"]
 [ext_resource type="Script" path="res://scripts/character_data.gd" id="1_wlpbu"]
 [ext_resource type="Texture2D" uid="uid://ceawcucic6w1s" path="res://art/human_male_body.png" id="2_7kuc1"]
 [ext_resource type="Script" path="res://scripts/character_functions.gd" id="3_ecgd1"]
 [ext_resource type="Script" path="res://scripts/character_time.gd" id="5_oiu2f"]
+[ext_resource type="Script" path="res://scripts/character_equipment.gd" id="7_5p0f0"]
 
 [node name="player" type="Node2D"]
 script = ExtResource("1_ht8d7")
@@ -22,6 +24,12 @@ script = ExtResource("3_ecgd1")
 
 [node name="Time" type="Node" parent="."]
 script = ExtResource("5_oiu2f")
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("1_cmhqp")
+
+[node name="Equipment" type="Node" parent="."]
+script = ExtResource("7_5p0f0")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)

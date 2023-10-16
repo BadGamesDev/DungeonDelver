@@ -19,6 +19,7 @@ class Room:
 	var area : Rect2
 	var connected : bool
 	var neighbors : Array
+	var chest_count : int
 	var mob_count : int
 
 class Cell:
@@ -26,6 +27,8 @@ class Cell:
 	var cell_position : Vector2i
 	var cell_room : Room
 	var character : Node2D
+	var object : Node2D
+	var items : Array[ItemDatabase.Item]
 	var tile : Vector2i
 	var walkable : bool
 
@@ -55,6 +58,7 @@ func _ready():
 	fill_rooms()
 	update_cells()
 	spawn_player()
+	spawn_chests(2)
 	spawn_mobs(6)
 
 func generate_bsp(area):
@@ -316,6 +320,27 @@ func fill_rooms():
 func spawn_player():
 	character_spawner.spawn_player(entrance_pos)
 
+func spawn_chests(chest_count): #add chances for different mobs
+	var placed_chests = 0
+	var try = 0
+	
+	while placed_chests < chest_count and try < 100:
+		var random_room_index = randi() % rooms.size()
+		var room = rooms[random_room_index]
+		
+		if room.connected == true and room.type == 4 and room.chest_count < 1:
+			var chest_x = randf_range(int(room.area.position.x) + 1, int(room.area.position.x + room.area.size.x) - 1) #randi_range can create exit and entrance outside of room for some reason
+			var chest_y = randf_range(int(room.area.position.y) + 1, int(room.area.position.y + room.area.size.y) - 1)
+			var chest_pos = Vector2i(chest_x, chest_y)
+			var new_cell = get_cell_at(chest_pos)
+			
+			if new_cell.character == null and new_cell.object == null:
+				character_spawner.spawn_chest(Vector2i(chest_x, chest_y))
+				room.chest_count += 1
+				placed_chests += 1
+		else:
+			try += 1
+
 func spawn_mobs(mob_count): #add chances for different mobs
 	var placed_mobs = 0
 	var try = 0
@@ -330,7 +355,7 @@ func spawn_mobs(mob_count): #add chances for different mobs
 			var character_pos = Vector2i(mob_x, mob_y)
 			var new_cell = get_cell_at(character_pos)
 			
-			if new_cell.character == null:
+			if new_cell.character == null and new_cell.object == null:
 				character_spawner.spawn_rat(Vector2i(mob_x, mob_y))
 				room.mob_count += 1
 				placed_mobs += 1

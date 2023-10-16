@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://c405u5xi158l4"]
+
+[ext_resource type="Script" path="res://scripts/object_data.gd" id="1_bc4a6"]
+[ext_resource type="Script" path="res://scripts/object_main.gd" id="1_diyy5"]
+[ext_resource type="Texture2D" uid="uid://bqbsr7ese8wrv" path="res://art/chest_basic_closed.png" id="2_r3bph"]
+[ext_resource type="Script" path="res://scripts/inventory.gd" id="2_uc0id"]
+[ext_resource type="Script" path="res://scripts/object_functions.gd" id="3_50fbg"]
+
+[node name="chest_basic" type="Node2D"]
+script = ExtResource("1_diyy5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_r3bph")
+
+[node name="Data" type="Node" parent="."]
+script = ExtResource("1_bc4a6")
+
+[node name="Functions" type="Node" parent="."]
+script = ExtResource("3_50fbg")
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("2_uc0id")

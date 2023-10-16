@@ -3,13 +3,14 @@ extends Node
 @onready var player = $"../../../character_spawner/player"
 
 @onready var data = $"../Data"
+@onready var equipment = $"../Equipment"
 @onready var functions = $"../Functions"
 
 var diff_to_player
 
 func AI_action():
 		if -1 <= player.data.cell.cell_position.x - data.cell.cell_position.x and player.data.cell.cell_position.x - data.cell.cell_position.x <= 1 and -1 <= player.data.cell.cell_position.y - data.cell.cell_position.y and player.data.cell.cell_position.y - data.cell.cell_position.y <= 1:
-			functions.attack(player)
+			functions.attack(player, "head")
 			print("attacked")
 			data.time_action -= data.attack_speed
 	
@@ -46,6 +47,5 @@ func AI_action():
 				allowed_moves.erase("down")
 				allowed_moves.erase("down_right")
 
-			print(diff_to_player)
 			functions.move(allowed_moves[randi_range(0,allowed_moves.size() - 1)])
 			data.time_action -= data.movement_speed

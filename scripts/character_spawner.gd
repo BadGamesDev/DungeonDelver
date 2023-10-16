@@ -1,11 +1,12 @@
 extends Node
-
+#RENAME THIS TO ENTITY SPAWNER
 @onready var tile_map = $"../TileMap"
 
 var ID = 0
 var type = {
 	"player": preload("res://prefabs/player.tscn"),
-	"rat": preload("res://prefabs/mob_rat.tscn")
+	"rat": preload("res://prefabs/mob_rat.tscn"),
+	"chest": preload("res://prefabs/chest_basic.tscn")
 	}
 
 func spawn_player(position):
@@ -15,6 +16,7 @@ func spawn_player(position):
 	add_child(new_spawn)
 	
 	var new_spawn_data = new_spawn.get_child(1)
+	var new_spawn_equipment = new_spawn.get_child(6)
 	
 	new_spawn_data.ID = ID
 	new_spawn_data.character_name = "Can"
@@ -41,6 +43,14 @@ func spawn_player(position):
 	
 	new_spawn_data.cell = tile_map.get_cell_at(position)
 	
+	new_spawn_equipment.equipment_slots = {
+		"right hand": null, 
+		"left hand": null, 
+		"head": null, 
+		"body": null, 
+		"feet": null
+		}
+	
 	ID += 1
 
 func spawn_rat(position):
@@ -50,6 +60,7 @@ func spawn_rat(position):
 	add_child(new_spawn)
 	
 	var new_spawn_data = new_spawn.get_child(1)
+	var new_spawn_equipment = new_spawn.get_child(6)
 	
 	new_spawn_data.ID = ID
 	new_spawn_data.character_name = "Rat"
@@ -77,5 +88,32 @@ func spawn_rat(position):
 	
 	new_spawn_data.cell = tile_map.get_cell_at(position)
 	
+	new_spawn_equipment.equipment_slots = {
+		"head": null, 
+		"body": null, 
+		"feet": null
+		}
+		
 	ID += 1
 
+func spawn_chest(position):
+	var new_spawn = type["chest"].instantiate()
+	new_spawn.position = tile_map.map_to_local(position)
+	tile_map.get_cell_at(position).object = new_spawn
+	add_child(new_spawn)
+	
+	var new_spawn_data = new_spawn.get_child(1)
+	var new_spawn_inventory = new_spawn.get_child(3)
+	
+	new_spawn_data.ID = ID
+	new_spawn_data.object_name = "Chest"
+	
+	new_spawn_data.cell = tile_map.get_cell_at(position)
+	
+	var a = ItemDatabase.items.keys()
+
+	a = a[randi() % a.size()]
+	new_spawn_inventory.add_item(ItemDatabase.items[a])
+	for key in new_spawn_inventory.inventory.keys():
+		print(key.item_name)
+	ID += 1
